@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test 1</title>
+</head>
+<body>
+    <p>
+        HTML-sivun tekstiä tässä <br>
+        Päästiin toka riville.
+    </p>
+
+    <script>
+        'use strict';           // huomaa typot
+
+        document.write("Javascript tulostaa www-sivulle <br>")
+        console.log('Tämä näkyy vain selaimen konsolissa...')
+
+        // esitellään uusi muuttuja, sen tyypiksi tulee undefined
+        let nimi;
+
+        // kysytään käyttäjältä nimi ja sijoitetaan saatu arvo muuttujaan nimi
+        nimi = prompt("Anna nimesi: ")      // muuttujan tyyppi nyt: string
+
+        // tulostusta eri tavoilla
+        document.write("Moi " + nimi + ", hauska nähdä! <br>")
+        // Huomaa erikoiset heittomerkit `...`
+        document.write(`Moikka ${nimi}, mitä kuuluu? <br>`)
+
+        // EI NÄIN, prompt(...) palauttaa aina merkkijonon
+        let ekaStr = prompt("Anna eka luku: (luen sen hölmösti tekstinä) ")
+        let tokaStr = "3"
+
+        // Nämäkin voidaan laskea yhteen ns. unaarisen etuplussan avulla
+        // esim. +ekaStr tarkoittaa muunna muuttujan arvo luvuksi tässä operaatiossa
+        let summa = +ekaStr + +tokaStr      // muuttujan summa tyypiksi tulee number
+        document.write('Tekstinä luettujen lukujen summa = ' + summa + '<br>')
+
+        // TEE NÄIN: +prompt(...) muuttaa käyttäjän arvon heti numeroksi
+        let eka, toka, tulos            // esitellään 3 muuttujaa (undefined)
+        eka = +prompt('Anna eka luku: ')
+        toka = +prompt("Anna toka luku: ")
+        tulos = eka + toka
+        document.write(`Lukujesi summa = ${tulos}, eikös vaan <br>`)
+    </script>
+</body>
+</html>
