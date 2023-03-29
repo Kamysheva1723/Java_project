@@ -1,6 +1,7 @@
 /*Write a program that prompts for three integers. The program prints the sum,
 product and average of the numbers to the HTML document. (3p)
 remember to convert strings to numbers when adding */
+
 'use strict';
 let n1 = parseFloat(prompt("Input first number..."))
 let n2 = parseFloat(prompt("Input second number..."))
