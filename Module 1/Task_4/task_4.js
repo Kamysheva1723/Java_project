@@ -13,6 +13,8 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+
+
 function getClass(number){
   switch(number){
     case 1:

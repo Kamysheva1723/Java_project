@@ -9,6 +9,7 @@ the function returns false.
 You cannot calculate the square root of a negative number.
 If the number entered by the user is negative, the program prints
 "The square root of a negative number is not defined" to the HTML document.*/
+"use strict"
 
 const answer = confirm("Should I calculate the square root?")
 
