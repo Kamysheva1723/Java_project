@@ -7,16 +7,16 @@ Do not use array.reverse() function.
 
 let numbers=[];
 for (let i=1;i<=5;i++){
-  let number_str=prompt("Enter "+i.toString()+". number...");
-  if (Number(number_str)) {
-    numbers[i-1]=Number(number_str);
+  let number_str = prompt("Enter "+i.toString()+". number...");
+  if ( Number(number_str) || number_str==="0") {
+    numbers[i-1] = Number(number_str);
   }
   else{
     i--;
     alert(number_str + " is not a number, try again...");
   }
 }
-for (let i=0;i<5;i++){
+for (let i=0; i<5; i++){
   document.getElementById("list").innerHTML += "<li>" + numbers[i] + "</li>";
 }
 for (let i=4;i>=0;i--){

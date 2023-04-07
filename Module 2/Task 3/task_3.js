@@ -7,12 +7,12 @@ in reverse alphabetical order. (2p)
 let dogs = [];
 
 for(let i=0; i<6; i++){
-  dogs[i] = prompt("Enter name of " + (i+1).toString() + ". dog...")
+  dogs[i] = prompt("Enter name of " + (i+1).toString() + ". dog...");
 }
 
 dogs.sort();
 dogs.reverse();
 
 for(let i=0; i<6; i++){
-  document.getElementById("dog_list").innerHTML += "<li>" + dogs[i] +"</li>"
+  document.getElementById("dog_list").innerHTML += "<li>" + dogs[i] +"</li>";
 }
