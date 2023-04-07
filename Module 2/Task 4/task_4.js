@@ -14,14 +14,14 @@ do {
 
   do {
     number_str = prompt("Enter number (zero for end)...");
-  } while ( Number(number_str) === NaN )
+  } while ( !Number(number_str) && number_str!=="0"  )
 
   numbers[i] = Number(number_str);
 
 }while(  number_str !== "0" )
 
 numbers.pop();  /*last was zero, so let's delete it*/
-numbers.sort();
+numbers.sort(function(a, b){return a-b});
 numbers.reverse();
 
 numbers.forEach (item => {
