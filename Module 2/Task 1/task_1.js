@@ -5,18 +5,19 @@ Do not use array.reverse() function.
 */
 let numbers=[];
 for (i=1;i<=5;i++){
-  number_str=prompt("Enter "+i.toString()+". number...")
+  number_str=prompt("Enter "+i.toString()+". number...");
   if (Number(number_str)) {
-    numbers[i-1]=Number(number_str)
+    numbers[i-1]=Number(number_str);
   }
   else{
     i--;
-    alert(number_str + " is not a number, try again...")
+    alert(number_str + " is not a number, try again...");
   }
 }
 for (i=0;i<5;i++){
-  document.getElementById("list").innerHTML += "<li>" + numbers[i] + "</li>"
+  document.getElementById("list").innerHTML += "<li>" + numbers[i] + "</li>";
 }
 for (i=4;i>=0;i--){
-  document.getElementById("reversed_list").innerHTML += "<li>" + numbers[i] + "</li>"
+  document.getElementById("reversed_list").innerHTML += "<li>" + numbers[i] + "</li>";
+  console.log(numbers[i]);
 }
