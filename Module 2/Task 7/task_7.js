@@ -6,7 +6,7 @@ the maximum number on the dice, which is asked from the user at the beginning. (
 
 "use strict"
 function dice(max_number){
-  return Math.floor(Math.random() * max_number + 1);
+  return Math.floor(Math.random() * max_number + 1); /*max+1-1=max*/
 }
 
 let dice_roll;
