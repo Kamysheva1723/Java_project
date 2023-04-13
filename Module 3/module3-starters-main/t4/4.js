@@ -1,3 +1,11 @@
+/*Open t4 folder in your IDE/editor. Add HTML by using createElement()
+and appenChild mehtods. (2p)
+Add the following HTML code to the element with id="target".
+Add the values from 'students' array to the <option> elements in a for-loop.
+<option value="2345768">John</option>
+<option value="2134657">Paul</option>
+<option value="5423679">Jones</option>
+open Element Inspector from DevTools to see the full result. (right click, inspect...)*/
 'use strict';
 const students = [
   {
@@ -13,3 +21,12 @@ const students = [
     id: '5423679',
   },
 ];
+
+const target = document.querySelector("#target");
+
+for (let i=0; i < students.length; i++){
+  const element = document.createElement("option");
+  element.value = students[i].id;
+  element.textContent = students[i].name;
+  target.appendChild(element);
+}
