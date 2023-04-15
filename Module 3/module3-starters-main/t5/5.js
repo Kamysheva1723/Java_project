@@ -1,3 +1,16 @@
+/*Open t5 folder in your IDE/editor. Create multiple <article> elements that
+contain heading, image, image caption and text and populate them with
+the data from picArray. Add the articles to the <section> element. (5p)
+The structure of the articles should be this:
+<article class="card">
+   <h2>title_from_picArray</h2>
+   <figure>
+      <img src="medium_image_from_picArray" alt="title_from_picArray">
+      <figcaption>caption_from_picarray</figcaption>
+   </figure>
+   <p>description_from_picArray</p>
+</article>
+*/
 'use strict';
 const picArray = [
   {
@@ -93,3 +106,32 @@ const picArray = [
 ];
 
 // add your code here
+
+const my_article = document.createElement('article');
+my_article.className = "card";
+
+for (let i=0; i < picArray.length; i++){
+
+  const my_head = document.createElement("h2");
+  my_head.textContent = picArray[i].title;
+  my_article.appendChild(my_head);
+
+  const my_figure = document.createElement("figure");
+  my_article.appendChild(my_figure);
+
+  const my_figcaption = document.createElement('figcaption');
+  my_figcaption.innerText = picArray[i].caption;
+  my_article.appendChild(my_figcaption);
+
+  const my_img = document.createElement("img");
+  my_img.src =  picArray[i].image.medium;
+  my_img.alt = picArray[i].title;
+  my_figure.appendChild(my_img);
+
+  const my_p = document.createElement("p")
+  my_p.innerText = picArray[i].description
+  my_article.appendChild(my_p);
+  }
+
+const my_section = document.getElementById("pictures");
+my_section.appendChild(my_article);
