@@ -1,32 +1,21 @@
-'use strict';
+/*Develop the app further.
+Add JavaScript that gets the value entered to the form and sends a request
+with fetch to https://api.tvmaze.com/search/shows?q=${value_from_input}.
+Print the search result to the console. (3p)*/
 
-// nettiin lähetettävän hakulauseen alkuosa (vakio)
-const hakuAlku = "https://api.tvmaze.com/search/shows?q="
+'use strict'
 
-// etsitään html-sivun form-elementti
-const tvForm = document.querySelector('#tv');
-
-// asetetaan lomakkeelle tapahtumankuuntelija
-tvForm.addEventListener('submit', async function (evt) {
-  // estetään lomakkeen oletustoiminta (action)
+const show_form = document.querySelector('#tv');
+show_form.addEventListener('submit', async function (evt) {
   evt.preventDefault();
-  // etsitään lomakkeelta käyttäjän antama syöte
-  const hakuArvo = document.querySelector('input[name=q]').value;
-  // muodostetaan lopullinen nettiin lähetettävä hakukysely
-  const hakuLause = hakuAlku + hakuArvo
-  console.log("-- Hakulause: " + hakuLause)
-
-  // Tehdään ajax-tyyppinen datan haku, hyödynnetään Fetch APIa.
-  // Käytetään asynkronisia funktioita ja promise-tekniikkaa.
   try {
-    // error handling: try/catch/finally
     const response = await fetch(
-      hakuLause
-    ); // starting data download, fetch returns a promise which contains an object of type 'response'
-    const jsonData = await response.json(); // retrieving the data retrieved from the response object using the json() function
-    console.log(jsonData); // log the result to the console
-    console.log(response);
-  } catch (error) {
+      "https://api.tvmaze.com/search/shows?q="
+            + document.querySelector('input[name=q]').value
+    );
+    const jsonData = await response.json();
+    console.log(jsonData);
+    } catch (error) {
     console.log(error.message);
   }
-});
+})
