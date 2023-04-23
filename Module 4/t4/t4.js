@@ -44,14 +44,15 @@ function output_on_page(data){
     tag_list.push(tag_link);
 
     const tag_image = document.createElement("img");
-    tag_image.src = data[i].show.image.medium ? data[i].show.image.medium : "https://via.placeholder.com/210x295?text=Not%20Found";
+    try {
+      tag_image.src = data[i].show.image.medium;
+    } catch(e){
+      console.log(e);
+      tag_image.src = "https://via.placeholder.com/210x295?text=Not%20Found";
+    }
+
     tag_image.alt = "";
     tag_image.margine = 8;
-    tag_image.addEventListener("error", function handleError( ) {
-    this.src = "https://via.placeholder.com/210x295?text=Not%20Found";
-    console.log("ups");
-    })
-    console.log(data[i].show.image.medium);
     tag_list.push(tag_image);
 
 
