@@ -1,16 +1,16 @@
 'use strict';
-// sources:
-// https://digitransit.fi/en/developers/apis/1-routing-api/itinerary-planning/
-// route points are in Google polyline encoded format, so you need to add support for Leafletiin:
-// https://github.com/jieter/Leaflet.encoded
 
+function getTime(unix_time){
 
-// show the map
-const map = L.map('map').setView([60.1785553, 24.8786212], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
-
+  const date = new Date(unix_time);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+}
 
 function getCoord(address) {
 
@@ -30,14 +30,15 @@ function getCoord(address) {
     return response.json();
   }).then(function(result) {
     console.log(result.features[0].geometry.coordinates);
-    const resultCoordinates = {latitude: result.features[0].geometry.coordinates[1],longitude: result.features[0].geometry.coordinates[1]};
-    getRoute(resultCoordinates,{latitude: 24.758061, longitude: 60.22})
+    const resultCoordinates = {latitude: result.features[0].geometry.coordinates[1],longitude: result.features[0].geometry.coordinates[0]};
+    getRoute(resultCoordinates,{latitude: 60.22, longitude: 24.75})
     })
 
 }
 
 function getRoute(origin, target) {
 
+  console.log(origin, target);
   const apiAddress = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
     // GraphQL query
   const GQLQuery = `{
@@ -75,6 +76,14 @@ function getRoute(origin, target) {
     }).then(function (result) {
         console.log(result.data.plan.itineraries[0].legs);
         const googleEncodedRoute = result.data.plan.itineraries[0].legs;
+
+        const startTime = googleEncodedRoute[0].startTime;
+        const endTime = googleEncodedRoute[googleEncodedRoute.length-1].endTime;
+        const next_route = document.createElement("h5")
+        next_route.textContent = "Start time: "
+            + getTime(startTime) + "; end time: " + getTime(endTime);
+        document.getElementById("result").appendChild(next_route);
+
         for (let i = 0; i < googleEncodedRoute.length; i++) {
             let color = '';
             switch (googleEncodedRoute[i].mode) {
@@ -100,19 +109,28 @@ function getRoute(origin, target) {
                 color
             }).addTo(map);
         }
+
         map.fitBounds([[origin.latitude, origin.longitude], [target.latitude, target.longitude]]);
+
     }).catch(function (e) {
         console.error(e.message);
     });
 }
 
+
+
 //main
+
+const map = L.map('map').setView([60.1785553, 24.8786212], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
 
   const address_form = document.querySelector('#address_form');
   address_form.addEventListener('submit', async function (evt) {
 
     evt.preventDefault();
-    getCoord(address_form.textContent);
+    getCoord(document.querySelector('input[name=q]').value);
 
 
  })
